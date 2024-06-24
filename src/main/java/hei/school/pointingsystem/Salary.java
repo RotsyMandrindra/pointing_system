@@ -1,55 +1,61 @@
 package hei.school.pointingsystem;
 
 public class Salary {
+
     private double netSalary;
-    private WorkingHour workingHour;
-    private Category category;
-    
-    public Salary(double grossSalary, WorkingHour workingHour, Category category){
+    private final WorkingHour workingHour;
+    private final Category category;
+
+    public Salary(double grossSalary, WorkingHour workingHour, Category category) {
         this.workingHour = workingHour;
         this.category = category;
         this.netSalary = calculateNetSalary(grossSalary);
     }
 
-    public double calculateNetSalary(double grossSalary){
+    private double calculateNetSalary(double grossSalary) {
         netSalary = grossSalary - (grossSalary * 20 / 100);
         return netSalary;
     }
 
-    public double calculateAdditionalHourSalary(){
+    public double calculateAdditionalHourSalary() {
         double normalHourRate = category.getHourRate();
         int additionalHour = workingHour.getAdditionalHour();
         double additionalHourSalary = 0.0;
 
-        if(additionalHour > 0){
-            int additionalHour30 = Math.min(8, additionalHour);
-            int additionalHour40 =  Math.min(8, Math.min(0, additionalHour - 8 ));
-            int additionalHour50 = Math.min(0, additionalHour - 16);
+        if (additionalHour > 0) {
+            boolean isNightShift = workingHour.isNightShift();
 
-            additionalHourSalary += additionalHour30 * normalHourRate * 1.3;
-            additionalHourSalary += additionalHour40 * normalHourRate * 1.4;
-            additionalHourSalary += additionalHour50 * normalHourRate * 1.5;
+            int additionalHourFull = Math.min(8, additionalHour);
+            int additionalHourPartial = Math.max(0, additionalHour - 8);
+            double nightShiftMultiplier = isNightShift ? 1.3 : 1.0;
+
+            additionalHourSalary += additionalHourFull * normalHourRate * nightShiftMultiplier;
+            additionalHourSalary += additionalHourPartial * normalHourRate * nightShiftMultiplier;
         }
-        return  additionalHourSalary;
+        return additionalHourSalary;
     }
 
-    public double calculateOvertimeSalary(){
+    public double calculateOvertimeSalary() {
         double normalHourlyRate = category.getHourRate();
         int overtimeHours = workingHour.getOvertimeHour();
         double overtimeSalary = 0.0;
 
         if (overtimeHours > 0) {
+            boolean isNightShift = workingHour.isNightShift();
+
             int overtimeHour30 = Math.min(8, overtimeHours);
             int overtimeHour50 = Math.min(12, Math.max(0, overtimeHours - 8));
 
-            overtimeSalary += overtimeHour30 * normalHourlyRate * 1.3;
-            overtimeSalary += overtimeHour50 * normalHourlyRate * 1.5;
+            double nightShiftMultiplier = isNightShift ? 1.3 : 1.0;
+
+            overtimeSalary += overtimeHour30 * normalHourlyRate * nightShiftMultiplier;
+            overtimeSalary += overtimeHour50 * normalHourlyRate * nightShiftMultiplier;
         }
 
         return overtimeSalary;
     }
 
-    public double calculateTotalSalary(){
+    public double calculateTotalSalary() {
         double basicSalaryPerWeek = category.getWeeklySalary();
         double overtimeSalary = calculateOvertimeSalary();
         double additionalHourSalary = calculateAdditionalHourSalary();
