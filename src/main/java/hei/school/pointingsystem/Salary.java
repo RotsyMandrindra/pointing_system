@@ -12,7 +12,7 @@ public class Salary {
         this.netSalary = calculateNetSalary(grossSalary);
     }
 
-    private double calculateNetSalary(double grossSalary) {
+    public double calculateNetSalary(double grossSalary) {
         netSalary = grossSalary - (grossSalary * 20 / 100);
         return netSalary;
     }
@@ -25,7 +25,7 @@ public class Salary {
         if (additionalHour > 0) {
             boolean isNightShift = workingHour.isNightShift();
 
-            int additionalHourFull = Math.min(8, additionalHour);
+            int additionalHourFull = Math.min(10, additionalHour);
             int additionalHourPartial = Math.max(0, additionalHour - 8);
             double nightShiftMultiplier = isNightShift ? 1.3 : 1.0;
 
