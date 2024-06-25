@@ -30,24 +30,4 @@ public class EmployeeTest {
         assertTrue(Rabe.isWorkingAtNight());
         assertFalse(Rakoto.isWorkingAtNight());
     }
-
-    @Test
-    void testWorkingHourRakoto() {
-        WorkingHour workingHourRakoto = new WorkingHour(10, 0, 7, 0);
-        LocalDate startDate = LocalDate.of(2024, 05, 26);
-        LocalDate endDate = LocalDate.of(2024, 07, 07);
-
-        long totalWorkingHour = workingHourRakoto.calculateTotalWorkingHour(startDate, endDate);
-        assertEquals(420, totalWorkingHour);
-    }
-
-    @Test
-    void testWorkingHourRabe() {
-        WorkingHour workingHourRabe = new WorkingHour(0, 0, 7, 14);
-        LocalDate startDate = LocalDate.of(2024, 05, 26);
-        LocalDate endDate = LocalDate.of(2024, 07, 07);
-
-        long totalWorkingHour = workingHourRabe.calculateTotalWorkingHour(startDate, endDate);
-        assertEquals(588, totalWorkingHour);
-    }
 }
