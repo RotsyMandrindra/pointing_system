@@ -1,6 +1,8 @@
 package hei.school.pointingsystem;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,9 +11,17 @@ import lombok.Data;
 @AllArgsConstructor
 
 public class WorkingHour {
-
-    private int normalHour;
+    private int normalHourDay;
     private int overtimeHour;
-    private int additionalHour;
-    private int weekbetween;
+    private int daysPerWeek;
+    private int normalHourNight;
+
+    public long calculateTotalWorkingHour(LocalDate startDate, LocalDate endDate){
+        long weekBetween = ChronoUnit.WEEKS.between(startDate, endDate);
+        long totalNormalHourDay = normalHourDay * daysPerWeek * weekBetween;
+        long totalNormalHourNight = normalHourNight * daysPerWeek * weekBetween;
+        long totalOvertimeHour = overtimeHour * daysPerWeek * weekBetween;
+        return totalOvertimeHour + totalNormalHourDay + totalNormalHourNight;
+    }
 }
+
