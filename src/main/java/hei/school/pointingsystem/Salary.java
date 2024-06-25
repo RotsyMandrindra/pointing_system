@@ -17,7 +17,7 @@ public class Salary {
         return netSalary;
     }
 
-    public double calculateAdditionalHourSalary() {
+    /*public double calculateAdditionalHourSalary() {
         double normalHourRate = category.getHourRate();
         int additionalHour = workingHour.getAdditionalHour();
         double additionalHourSalary = 0.0;
@@ -60,5 +60,5 @@ public class Salary {
         double overtimeSalary = calculateOvertimeSalary();
         double additionalHourSalary = calculateAdditionalHourSalary();
         return basicSalaryPerWeek + overtimeSalary + additionalHourSalary;
-    }
+    }*/
 }

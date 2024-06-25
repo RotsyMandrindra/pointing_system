@@ -7,30 +7,26 @@ import org.slf4j.LoggerFactory;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class EmployeeTest {
-    private static final Logger log = LoggerFactory.getLogger(EmployeeTest.class);
-
     @Test
     void testAddEmployee(){
         Person rakoto = new Person("Rakoto", "", LocalDate.of(1997, 12, 5));
         Category guardianCategory = new Category("guardian", 10, 100000);
-        WorkingHour workingHour = new WorkingHour(8, 0, 0);
+        WorkingHour workingHour = new WorkingHour(8, 0, 0, 0);
         Salary salaryGuardian = new Salary(100000, workingHour, guardianCategory);
-        Employee Rakoto = new Employee(rakoto, 12, LocalDate.of(2023, 4, 12), LocalDate.of(2025, 4, 12), guardianCategory, salaryGuardian);
+        Employee Rakoto = new Employee(rakoto, 12, LocalDate.of(2023, 4, 12), LocalDate.of(2025, 4, 12), guardianCategory, salaryGuardian, false);
 
         Person rabe = new Person("Rabe", "", LocalDate.of(1996, 5, 14));
-        Employee Rabe = new Employee(rabe, 13, LocalDate.of(2022, 4, 12), LocalDate.of(2025, 4, 12), guardianCategory, salaryGuardian);
+        Employee Rabe = new Employee(rabe, 13, LocalDate.of(2022, 4, 12), LocalDate.of(2025, 4, 12), guardianCategory, salaryGuardian, true);
 
         PointingSystem pointingSystem = new PointingSystem();
         pointingSystem.addEmployee(Rakoto);
         pointingSystem.addEmployee(Rabe);
 
-        int registrationNumberRakoto = Rakoto.getRegistrationNumber();
-        int registrationNumberRabe = Rabe.getRegistrationNumber();
-        assertEquals(12, registrationNumberRakoto);
-        assertEquals(13, registrationNumberRabe);
+        assertTrue(Rabe.isWorkingAtNight());
+        assertFalse(Rakoto.isWorkingAtNight());
     }
 
     @Test
@@ -50,5 +46,6 @@ public class EmployeeTest {
         assertEquals(42, totalDaysRakoto + totalNightRakoto);
         assertEquals(42, totalNightsRabe + totalDayRabe);
     }
+
 
 }

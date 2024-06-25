@@ -15,4 +15,9 @@ public class Employee {
     private LocalDate contractEndDate;
     private Category category;
     private Salary salary;
+    private boolean workAtNight;
+
+    public boolean isWorkingAtNight() {
+        return workAtNight;
+    }
 }
