@@ -24,9 +24,15 @@ public class WorkingHour {
         return totalOvertimeHour + totalNormalHourDay + totalNormalHourNight;
     }
 
-    public double calculateSalaryEarnedPerHour(int daysPerWeek, int hourPerDay, double grossSalary){
+    public double calculateSalaryEarnedPerHourInDay(double grossSalary){
         double grossSalaryPerWeek = grossSalary / daysPerWeek;
-        return Math.round(grossSalaryPerWeek / hourPerDay);
+        return Math.round(grossSalaryPerWeek / normalHourDay);
+    }
+
+    public double calculateSalaryEarnedPerHourInNight(double grossSalary, double additionalHourlyRate){
+        double grossSalaryWithAdditionalHourlyRate = grossSalary * additionalHourlyRate / 100;
+        double grossSalaryPerWeek = grossSalaryWithAdditionalHourlyRate / daysPerWeek;
+        return Math.round(grossSalaryPerWeek / normalHourNight);
     }
 }
 

@@ -30,7 +30,14 @@ public class WorkingHourTest {
     @Test
     void calculateRakotoSalaryEarnedPerHour(){
         WorkingHour workingHourRakoto = new WorkingHour(10, 0, 7, 0);
-        double workingHourRakotoPerDay = workingHourRakoto.calculateSalaryEarnedPerHour(7, 10, 100000);
+        double workingHourRakotoPerDay = workingHourRakoto.calculateSalaryEarnedPerHourInDay(100000);
         assertEquals(1429, workingHourRakotoPerDay);
+    }
+
+    @Test
+    void calculateRabeSalaryEarnedPerHour(){
+        WorkingHour workingHourRabe = new WorkingHour(0, 0, 7, 14);
+        double workingHourRakotoPerDay = workingHourRabe.calculateSalaryEarnedPerHourInNight(100000, 130);
+        assertEquals(1327, workingHourRakotoPerDay);
     }
 }
