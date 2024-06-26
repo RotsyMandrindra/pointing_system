@@ -1,7 +1,6 @@
 package hei.school.pointingsystem;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -42,5 +41,11 @@ public class JanitorCalendar {
         double publicHolidaySalary = janitorCalendar.getGrossSalaryWithBonusHour(grossSalaryPerDay, bonusRate, numberOfPublicHoliday);
 
         return regularDaySalary + publicHolidaySalary;
+    }
+
+    public double getSalaryWithoutBonusHourPerHour(int numberHourPerDay, int numberDayPerWeek, double grossSalary){
+        double salaryEarnedPerDay = grossSalary / numberDayPerWeek;
+        double salaryEarnedPerDayPerHour = salaryEarnedPerDay / numberHourPerDay;
+        return Math.round(salaryEarnedPerDayPerHour);
     }
 }

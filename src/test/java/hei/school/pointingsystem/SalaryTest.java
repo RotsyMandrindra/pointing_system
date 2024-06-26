@@ -35,4 +35,23 @@ public class SalaryTest {
 
         assertEquals(612856.959, totalSalaryEarned);
     }
+
+    @Test
+    void how_much_rakoto_earns_per_hour(){
+        List<LocalDate> publicHolidays = Arrays.asList(
+                LocalDate.of(2024, 6, 17),
+                LocalDate.of(2024, 6, 25),
+                LocalDate.of(2024, 6, 26)
+        );
+
+        JanitorCalendar rakotoJanitorCalendar = new JanitorCalendar(
+                LocalDate.of(2024, 5, 26),
+                LocalDate.of(2024, 7, 7),
+                publicHolidays
+        );
+
+        double salaryEarnedRakoto = rakotoJanitorCalendar.getSalaryWithoutBonusHourPerHour(10, 7, 100000);
+
+        assertEquals(1429, salaryEarnedRakoto);
+    }
 }
