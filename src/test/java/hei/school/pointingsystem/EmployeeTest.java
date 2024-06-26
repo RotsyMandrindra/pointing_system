@@ -3,6 +3,8 @@ package hei.school.pointingsystem;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,8 +15,9 @@ public class EmployeeTest {
         Category guardianCategory = new Category("guardian", 10, 100000);
         WorkingHour workingHourRakoto = new WorkingHour(10, 0, 7, 0);
         WorkingHour workingHourRabe = new WorkingHour(0, 0, 7, 14);
-        Salary salaryGuardianRabe = new Salary(100000, workingHourRabe, guardianCategory);
-        Salary salaryGuardianRakoto = new Salary(100000, workingHourRakoto, guardianCategory);
+        List<LocalDate> publicHolidays = new ArrayList<>();
+        Salary salaryGuardianRabe = new Salary(100000, workingHourRabe, guardianCategory, publicHolidays);
+        Salary salaryGuardianRakoto = new Salary(100000, workingHourRakoto, guardianCategory, publicHolidays);
         Employee Rakoto = new Employee(rakoto, 12, LocalDate.of(2023, 4, 12), LocalDate.of(2025, 4, 12), guardianCategory, salaryGuardianRakoto, false);
 
         Person rabe = new Person("Rabe", "", LocalDate.of(1996, 5, 14));
