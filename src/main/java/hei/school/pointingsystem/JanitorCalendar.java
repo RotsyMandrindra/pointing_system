@@ -43,7 +43,14 @@ public class JanitorCalendar {
         return regularDaySalary + publicHolidaySalary;
     }
 
-    public double getSalaryWithoutBonusHourPerHour(int numberHourPerDay, int numberDayPerWeek, double grossSalary){
+    public double getSalaryWithoutBonusHourPerHour(int numberHourPerDay, int numberDayPerWeek, double grossSalary, double bonusRate){
+
+        if(bonusRate > 0){
+            double grossSalaryWithBonus = grossSalary * bonusRate;
+            double salaryEarnedPerDayWithBonus = grossSalaryWithBonus / numberDayPerWeek;
+            double salaryEarnedPerDayPerHourWithBonus = salaryEarnedPerDayWithBonus / numberHourPerDay;
+            return Math.round(salaryEarnedPerDayPerHourWithBonus);
+        }
         double salaryEarnedPerDay = grossSalary / numberDayPerWeek;
         double salaryEarnedPerDayPerHour = salaryEarnedPerDay / numberHourPerDay;
         return Math.round(salaryEarnedPerDayPerHour);

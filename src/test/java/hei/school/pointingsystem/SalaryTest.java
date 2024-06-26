@@ -50,8 +50,27 @@ public class SalaryTest {
                 publicHolidays
         );
 
-        double salaryEarnedRakoto = rakotoJanitorCalendar.getSalaryWithoutBonusHourPerHour(10, 7, 100000);
+        double salaryEarnedRakoto = rakotoJanitorCalendar.getSalaryWithoutBonusHourPerHour(10, 7, 100000, 0);
 
         assertEquals(1429, salaryEarnedRakoto);
+    }
+
+    @Test
+    void how_much_rabe_earns_per_hour(){
+        List<LocalDate> publicHolidays = Arrays.asList(
+                LocalDate.of(2024, 6, 17),
+                LocalDate.of(2024, 6, 25),
+                LocalDate.of(2024, 6, 26)
+        );
+
+        JanitorCalendar rabeJanitorCalendar = new JanitorCalendar(
+                LocalDate.of(2024, 5, 26),
+                LocalDate.of(2024, 7, 7),
+                publicHolidays
+        );
+
+        double salaryEarnedRabe = rabeJanitorCalendar.getSalaryWithoutBonusHourPerHour(14, 7, 100000, 1.3);
+
+        assertEquals(1327, salaryEarnedRabe);
     }
 }
