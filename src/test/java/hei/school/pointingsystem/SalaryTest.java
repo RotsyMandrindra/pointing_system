@@ -27,13 +27,15 @@ public class SalaryTest {
         LocalDate startDate = LocalDate.of(2024, 5, 26);
 
         LocalDate endDate = LocalDate.of(2024, 7, 7);
-        double grossSalaryPerDay = 14285;
+        double grossSalaryPerDay = 14286;
 
         double bonusRate = 1.3;
 
-        double totalSalaryEarned = rakotoJanitorCalendar.getTotalGrossSalary(grossSalaryPerDay, rakotoJanitorCalendar, bonusRate, startDate, endDate);
+        int numberOfPublicHolidays = rakotoJanitorCalendar.getNumberOfPublicHoliday(publicHolidays);
 
-        assertEquals(612856.959, totalSalaryEarned);
+        double totalSalaryEarned = rakotoJanitorCalendar.getTotalGrossSalaryWithPublicHolidays(grossSalaryPerDay, rakotoJanitorCalendar, bonusRate, startDate, endDate, numberOfPublicHolidays);
+
+        assertEquals(612869, totalSalaryEarned);
     }
 
     @Test

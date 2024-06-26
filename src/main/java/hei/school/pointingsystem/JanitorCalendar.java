@@ -29,18 +29,16 @@ public class JanitorCalendar {
         return grossSalary * bonusRate * numberOfPublicHolidays;
     }
 
-    public double getTotalGrossSalary(double grossSalaryPerDay, JanitorCalendar janitorCalendar, double bonusRate, LocalDate startDate, LocalDate endDate){
-        List <LocalDate> publicHoliday = new ArrayList<>();
-        long numberOfPublicHoliday = janitorCalendar.getNumberOfPublicHoliday(publicHoliday);
+    public double getTotalGrossSalaryWithPublicHolidays(double grossSalaryPerDay, JanitorCalendar janitorCalendar, double bonusRate, LocalDate startDate, LocalDate endDate, int numberOfPublicHolidays){
         long totalDays = janitorCalendar.getTotalDaysWorkInAMonth(startDate, endDate);
+        long regularDays = totalDays - numberOfPublicHolidays;
 
-        long regularDay = totalDays - numberOfPublicHoliday;
+        double regularDaysSalary = regularDays * grossSalaryPerDay;
 
-        double regularDaySalary = regularDay * grossSalaryPerDay;
+        double publicHolidaySalary = numberOfPublicHolidays * bonusRate * grossSalaryPerDay;
+        double totalEarnedSalary = Math.round(publicHolidaySalary + regularDaysSalary);
 
-        double publicHolidaySalary = janitorCalendar.getGrossSalaryWithBonusHour(grossSalaryPerDay, bonusRate, numberOfPublicHoliday);
-
-        return regularDaySalary + publicHolidaySalary;
+        return totalEarnedSalary;
     }
 
     public double getSalaryWithoutBonusHourPerHour(int numberHourPerDay, int numberDayPerWeek, double grossSalary, double bonusRate){
