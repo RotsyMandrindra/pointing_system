@@ -75,4 +75,32 @@ public class SalaryTest {
 
         assertEquals(1327, salaryEarnedRabe);
     }
+
+    @Test
+    void testRabeSalaryWithPublicHolidays(){
+        List<LocalDate> publicHolidays = Arrays.asList(
+                LocalDate.of(2024, 6, 17),
+                LocalDate.of(2024, 6, 25),
+                LocalDate.of(2024, 6, 26)
+        );
+
+        JanitorCalendar rakotoJanitorCalendar = new JanitorCalendar(
+                LocalDate.of(2024, 5, 26),
+                LocalDate.of(2024, 7, 7),
+                publicHolidays
+        );
+
+        LocalDate startDate = LocalDate.of(2024, 5, 26);
+
+        LocalDate endDate = LocalDate.of(2024, 7, 7);
+        double grossSalaryPerDay = 18571;
+
+        double bonusRate = 1.3;
+
+        int numberOfPublicHolidays = rakotoJanitorCalendar.getNumberOfPublicHoliday(publicHolidays);
+
+        double totalSalaryEarned = rakotoJanitorCalendar.getTotalGrossSalaryWithPublicHolidays(grossSalaryPerDay, rakotoJanitorCalendar, bonusRate, startDate, endDate, numberOfPublicHolidays);
+
+        assertEquals(796696, totalSalaryEarned);
+    }
 }

@@ -32,12 +32,10 @@ public class JanitorCalendar {
     public double getTotalGrossSalaryWithPublicHolidays(double grossSalaryPerDay, JanitorCalendar janitorCalendar, double bonusRate, LocalDate startDate, LocalDate endDate, int numberOfPublicHolidays){
         long totalDays = janitorCalendar.getTotalDaysWorkInAMonth(startDate, endDate);
         long regularDays = totalDays - numberOfPublicHolidays;
-
         double regularDaysSalary = regularDays * grossSalaryPerDay;
 
         double publicHolidaySalary = numberOfPublicHolidays * bonusRate * grossSalaryPerDay;
         double totalEarnedSalary = Math.round(publicHolidaySalary + regularDaysSalary);
-
         return totalEarnedSalary;
     }
 
