@@ -35,8 +35,7 @@ public class JanitorCalendar {
         double regularDaysSalary = regularDays * grossSalaryPerDay;
 
         double publicHolidaySalary = numberOfPublicHolidays * bonusRate * grossSalaryPerDay;
-        double totalEarnedSalary = Math.round(publicHolidaySalary + regularDaysSalary);
-        return totalEarnedSalary;
+        return Math.round(publicHolidaySalary + regularDaysSalary);
     }
 
     public double getSalaryWithoutBonusHourPerHour(int numberHourPerDay, int numberDayPerWeek, double grossSalary, double bonusRate){
@@ -50,5 +49,9 @@ public class JanitorCalendar {
         double salaryEarnedPerDay = grossSalary / numberDayPerWeek;
         double salaryEarnedPerDayPerHour = salaryEarnedPerDay / numberHourPerDay;
         return Math.round(salaryEarnedPerDayPerHour);
+    }
+
+    public double calculateNetSalary(double grossSalary) {
+        return grossSalary - (grossSalary * 20 / 100);
     }
 }

@@ -1,7 +1,6 @@
 package hei.school.pointingsystem;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 
 import lombok.AllArgsConstructor;
